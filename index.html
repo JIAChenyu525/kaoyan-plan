@@ -164,40 +164,13 @@ h1{
 }
 .now-chips{display:flex;flex-wrap:wrap;gap:7px}
 .now-chip{
-  display:inline-flex;align-items:center;gap:8px;
-  font-family:inherit;font-size:12.5px;line-height:1;
-  padding:7px 12px 7px 9px;
+  display:inline-flex;align-items:center;gap:7px;
+  font-size:12.5px;line-height:1;
+  padding:6px 11px;
   border:1px solid var(--hair);border-radius:20px;
   background:var(--surface-2);color:var(--ink-2);
-  cursor:pointer;
-  transition:border-color .12s ease,color .12s ease,background .12s ease;
 }
-.now-chip:hover{border-color:var(--rule);color:var(--ink)}
-.now-chip:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
-.now-chip .bx{
-  width:14px;height:14px;flex:0 0 auto;
-  border:1.5px solid var(--rule);border-radius:4px;
-  position:relative;
-  transition:background .12s ease,border-color .12s ease;
-}
-.now-chip[aria-checked="true"]{
-  color:var(--ink-3);
-  background:transparent;
-  border-color:var(--hair);
-  text-decoration:line-through;
-  text-decoration-color:var(--rule);
-}
-.now-chip[aria-checked="true"] .bx{
-  background:var(--chip-bg,var(--ink-3));
-  border-color:var(--chip-bg,var(--ink-3));
-}
-.now-chip[aria-checked="true"] .bx::after{
-  content:"";position:absolute;left:3.5px;top:0.5px;
-  width:4px;height:8px;
-  border:solid var(--chip-on,var(--surface));
-  border-width:0 1.5px 1.5px 0;
-  transform:rotate(45deg);
-}
+.now-chip .dot{width:9px;height:9px;border-radius:3px;margin:0}
 .now-chip .sub{color:var(--ink-3);font-size:11.5px}
 
 /* 明细表里当前所处的阶段 */
@@ -838,7 +811,6 @@ section.subj{
   const TICKS  = [];  /* 明细行里的勾选框 */
   const COUNTS = [];  /* 每科的 x / n */
   const ACTIVE = [];  /* 今天正在进行的阶段 */
-  const CHIPS  = [];  /* 顶部"现在在跑"的胶囊 */
 
   function persist(){
     if (!canPersist) return;
@@ -868,11 +840,6 @@ section.subj{
       const on = !!m.key && done.has(m.key);
       m.el.classList.toggle('done', on);
       m.el.setAttribute('aria-checked', on ? 'true' : 'false');
-    });
-    CHIPS.forEach(function(c){
-      const on = done.has(c.key);
-      c.el.setAttribute('aria-checked', on ? 'true' : 'false');
-      c.el.title = on ? '点一下取消' : '点一下标记完成';
     });
     SUBJECTS.forEach(function(sub, si){
       let c = 0;
@@ -1301,27 +1268,23 @@ section.subj{
     subsEl.appendChild(sec);
   });
 
-  /* ---------- 顶部「现在在跑」 ---------- */
+  /* ---------- 顶部「现在在跑」：按当天日期自动决定，纯展示 ---------- */
   const nowBox = document.getElementById('nowBox');
   const nowChips = document.getElementById('nowChips');
   if (ACTIVE.length){
     ACTIVE.forEach(function(a){
-      const chip = document.createElement('button');
-      chip.type = 'button';
+      const chip = document.createElement('span');
       chip.className = 'now-chip';
-      chip.setAttribute('role', 'checkbox');
-      chip.setAttribute('aria-checked', 'false');
-      chip.style.setProperty('--chip-bg', 'var(' + a.bg + ')');
-      chip.style.setProperty('--chip-on', 'var(' + a.on + ')');
 
-      const bx = document.createElement('span'); bx.className = 'bx';
+      const dt = document.createElement('i');
+      dt.className = 'dot';
+      dt.style.background = 'var(' + a.bg + ')';
+
       const sb = document.createElement('span'); sb.className = 'sub'; sb.textContent = a.sub;
       const tx = document.createElement('span'); tx.textContent = a.label;
-      chip.appendChild(bx); chip.appendChild(sb); chip.appendChild(tx);
 
-      chip.addEventListener('click', function(){ toggle(a.key); });
+      chip.appendChild(dt); chip.appendChild(sb); chip.appendChild(tx);
       nowChips.appendChild(chip);
-      CHIPS.push({ el: chip, key: a.key });
     });
     nowBox.hidden = false;
   }
@@ -1341,6 +1304,19 @@ section.subj{
   window.addEventListener('scroll', function(){
     toTop.hidden = window.scrollY < 700;
   }, { passive:true });
+
+  /* ---------- 跨天自动更新 ----------
+     页面开到第二天，日期相关的东西（今日一句、今天那条线、现在在跑的标签、
+     明细表的「现在」标记）都得跟着换。切回这个标签页时查一次，平时每分钟查一次，
+     发现日期变了就重载——重载最省事，也不会出现半新半旧的状态。 */
+  const dayKey = today.toDateString();
+  function checkDay(){
+    if (new Date().toDateString() !== dayKey) location.reload();
+  }
+  document.addEventListener('visibilitychange', function(){
+    if (document.visibilityState === 'visible') checkDay();
+  });
+  setInterval(checkDay, 60000);
 
   /* ---------- 首屏渲染进度 ---------- */
   if (!canPersist){
