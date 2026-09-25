@@ -176,6 +176,38 @@ h1{
 
 .gantt-scroll{overflow-x:auto;padding-bottom:6px}
 
+/* ---------- 进度条 ---------- */
+.prog{
+  display:flex;flex-direction:column;gap:8px;
+  margin-bottom:18px;
+}
+.prog-head{
+  display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;
+  gap:4px 14px;
+  font-size:12.5px;color:var(--ink-2);
+}
+.prog-num{
+  font-family:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  font-size:12px;color:var(--ink-3);font-variant-numeric:tabular-nums;
+}
+.prog-num b{color:var(--ink);font-weight:500}
+.prog-track{
+  height:8px;border-radius:4px;
+  background:var(--surface-2);
+  border:1px solid var(--hair);
+  overflow:hidden;
+}
+.prog-fill{
+  height:100%;width:0%;
+  background:var(--m3);
+  border-radius:0 3px 3px 0;
+  transition:width .25s ease;
+}
+.prog-hint{
+  margin:0;font-size:12px;color:var(--ink-3);
+  padding-left:10px;border-left:2px solid var(--hair);
+}
+
 .gantt{
   position:relative;
   width:calc(var(--gutter) + 16 * var(--mw));
@@ -261,7 +293,13 @@ h1{
   padding:0 5px;
   overflow:hidden;
   cursor:default;
-  transition:filter .12s ease;
+  background:var(--seg);color:var(--seg-on);
+  transition:filter .12s ease,background .2s ease,color .2s ease;
+}
+/* 已完成的阶段：底色褪回表面色，文字换成中性色保持可读 */
+.seg.done{
+  background:color-mix(in srgb,var(--seg) 26%,var(--surface));
+  color:var(--ink-2);
 }
 .seg-label{
   font-size:11px;font-weight:500;line-height:1.2;
@@ -314,6 +352,12 @@ h1{
   display:flex;align-items:center;justify-content:center;
   padding:4px 2px;overflow:hidden;
   cursor:default;
+  background:var(--seg);color:var(--seg-on);
+  transition:background .2s ease,color .2s ease;
+}
+.vg-block.done{
+  background:color-mix(in srgb,var(--seg) 26%,var(--surface));
+  color:var(--ink-2);
 }
 .vg-block span{
   writing-mode:vertical-rl;
@@ -374,11 +418,45 @@ section.subj{
 
 .phases{display:flex;flex-direction:column;gap:0}
 .phase{
-  display:grid;grid-template-columns:126px 108px 1fr;gap:4px 16px;
+  display:grid;grid-template-columns:126px 108px 1fr 30px;gap:4px 16px;
   padding:9px 0;border-top:1px solid var(--hair);
 }
 .phase:first-child{border-top:0;padding-top:0}
 .phase:last-child{padding-bottom:0}
+
+/* 打勾 */
+.tick{
+  appearance:none;-webkit-appearance:none;
+  width:22px;height:22px;margin:0;
+  justify-self:end;align-self:center;
+  border:1.5px solid var(--rule);border-radius:6px;
+  background:var(--surface);
+  cursor:pointer;position:relative;
+  transition:background .12s ease,border-color .12s ease;
+}
+.tick:hover{border-color:var(--ink-3)}
+.tick:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.tick:checked{
+  background:var(--tick-bg,var(--ink-3));
+  border-color:var(--tick-bg,var(--ink-3));
+}
+.tick:checked::after{
+  content:"";position:absolute;left:7px;top:2.5px;
+  width:5px;height:10px;
+  border:solid var(--tick-on,var(--surface));
+  border-width:0 2px 2px 0;
+  transform:rotate(45deg);
+}
+.phase.is-done .pn{color:var(--ink-3)}
+.phase.is-done .pd{color:var(--ink-3)}
+.phase.is-done .pw{color:var(--ink-3)}
+
+.subj-count{
+  margin-left:auto;
+  font-family:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  font-size:12px;color:var(--ink-3);font-variant-numeric:tabular-nums;
+  white-space:nowrap;
+}
 .pw{
   font-family:"IBM Plex Mono",ui-monospace,Consolas,monospace;
   font-size:12px;color:var(--ink-2);padding-top:1px;
@@ -427,8 +505,11 @@ section.subj{
   .chart{padding:16px 14px}
   .gantt-scroll{display:none}
   .gantt-v{display:grid}
-  .phase{grid-template-columns:1fr;gap:2px 0;padding:11px 0}
-  .pn{order:-1}
+  .phase{grid-template-columns:1fr 30px;gap:2px 10px;padding:12px 0}
+  .pn{grid-column:1;grid-row:1}
+  .pw{grid-column:1;grid-row:2}
+  .pd{grid-column:1;grid-row:3}
+  .tick{grid-column:2;grid-row:1 / span 3;align-self:start;justify-self:end;margin-top:1px}
   .notes{padding:16px}
 }
 @media (prefers-reduced-motion:reduce){
@@ -466,6 +547,18 @@ section.subj{
   <div class="chart-head">
     <h2>四科时间轴</h2>
     <p>点按或悬停色块，看该阶段要做什么</p>
+  </div>
+
+  <div class="prog">
+    <div class="prog-head">
+      <span>总体进度</span>
+      <span class="prog-num"><b id="progDone">0</b> / <span id="progTotal">18</span> 个阶段完成</span>
+    </div>
+    <div class="prog-track" id="progBar" role="progressbar"
+         aria-valuemin="0" aria-valuemax="18" aria-valuenow="0" aria-label="总体进度">
+      <div class="prog-fill" id="progFill"></div>
+    </div>
+    <p class="prog-hint" id="progHint" hidden></p>
   </div>
 
   <div class="gantt-scroll">
@@ -624,6 +717,84 @@ section.subj{
       mats:['徐涛强化课','徐涛《核心讲案》','马原 + 史纲 720 题','刷题小程序','肖八','肖四','B 站抄材料教程']
     }
   ];
+
+  /* ---------- 打勾进度：状态存在浏览器本地 ---------- */
+  const STORE_KEY = 'kaoyan-progress-v1';
+  const TOTAL_PHASES = SUBJECTS.reduce(function(a, s){ return a + s.rows.length; }, 0);
+
+  /* 时间轴上的色块要能找到它在明细表里对应的那一行，才能一起变灰。
+     先按阶段名精确匹配；政治的色块用的是简称，再兜一层别名。 */
+  const LABEL_ALIAS = { '强化课':'徐涛强化课', '模拟卷':'模拟卷练手' };
+  const LABEL2ROW = SUBJECTS.map(function(sub){
+    const m = {};
+    sub.rows.forEach(function(r, ri){ m[r.name] = ri; });
+    return m;
+  });
+  function phaseKey(laneIndex, label){
+    const m = LABEL2ROW[laneIndex];
+    if (!m) return null;
+    if (label in m) return 's' + laneIndex + '-' + m[label];
+    const alt = LABEL_ALIAS[label];
+    if (alt && alt in m) return 's' + laneIndex + '-' + m[alt];
+    return null;
+  }
+
+  let done = new Set();
+  let canPersist = true;
+  try {
+    /* 写一次读一次，确认这个浏览器真的允许本地文件存数据 */
+    localStorage.setItem(STORE_KEY + ':probe', '1');
+    canPersist = localStorage.getItem(STORE_KEY + ':probe') === '1';
+    localStorage.removeItem(STORE_KEY + ':probe');
+    if (canPersist) {
+      const raw = localStorage.getItem(STORE_KEY);
+      if (raw) done = new Set(JSON.parse(raw));
+    }
+  } catch (e) {
+    canPersist = false;
+  }
+
+  const MARKS  = [];  /* 时间轴上的色块 */
+  const TICKS  = [];  /* 明细行里的勾选框 */
+  const COUNTS = [];  /* 每科的 x / n */
+
+  function persist(){
+    if (!canPersist) return;
+    try {
+      localStorage.setItem(STORE_KEY, JSON.stringify(Array.from(done)));
+    } catch (e) {
+      canPersist = false;
+    }
+  }
+
+  function refresh(){
+    let n = 0;
+
+    TICKS.forEach(function(t){
+      const on = done.has(t.key);
+      t.el.checked = on;
+      t.row.classList.toggle('is-done', on);
+    });
+    MARKS.forEach(function(m){
+      m.el.classList.toggle('done', !!m.key && done.has(m.key));
+    });
+    SUBJECTS.forEach(function(sub, si){
+      let c = 0;
+      sub.rows.forEach(function(r, ri){
+        if (done.has('s' + si + '-' + ri)) c++;
+      });
+      n += c;
+      COUNTS[si].textContent = c + ' / ' + sub.rows.length;
+    });
+
+    document.getElementById('progDone').textContent = n;
+    document.getElementById('progTotal').textContent = TOTAL_PHASES;
+    document.getElementById('progFill').style.width =
+      (TOTAL_PHASES ? (n / TOTAL_PHASES) * 100 : 0) + '%';
+    const bar = document.getElementById('progBar');
+    bar.setAttribute('aria-valuenow', n);
+    bar.setAttribute('aria-valuemax', TOTAL_PHASES);
+  }
 
   /* ---------- month ruler ---------- */
   const monthsEl = document.getElementById('months');
@@ -833,9 +1004,10 @@ section.subj{
         d.tabIndex = 0;
         d.style.setProperty('--s', seg.s);
         d.style.setProperty('--e', seg.e);
-        d.style.background = 'var(' + bg + ')';
-        d.style.color = 'var(' + on + ')';
+        d.style.setProperty('--seg', 'var(' + bg + ')');
+        d.style.setProperty('--seg-on', 'var(' + on + ')');
         d.setAttribute('aria-label', lane.name + ' ' + seg.label + '，' + seg.when + '。' + seg.what);
+        MARKS.push({ el: d, key: phaseKey(li, seg.label) });
 
         const sp = document.createElement('span');
         sp.className = 'seg-label';
@@ -870,11 +1042,11 @@ section.subj{
   function mLabel(m){ return (m < 4 ? m + 9 : m - 3) + '月'; }
 
   const VCOLS = [
-    {name:'数学',   segs: LANES[0].rows[0]},
-    {name:'线代',   segs: LANES[0].rows[1]},
-    {name:'英语',   segs: LANES[1].rows[0].concat(LANES[1].rows[1] || [])},
-    {name:'专业课', segs: LANES[2].rows[0]},
-    {name:'政治',   segs: LANES[3].rows[0]}
+    {name:'数学',   lane:0, segs: LANES[0].rows[0]},
+    {name:'线代',   lane:0, segs: LANES[0].rows[1]},
+    {name:'英语',   lane:1, segs: LANES[1].rows[0].concat(LANES[1].rows[1] || [])},
+    {name:'专业课', lane:2, segs: LANES[2].rows[0]},
+    {name:'政治',   lane:3, segs: LANES[3].rows[0]}
   ];
 
   const hd0 = mkEl('vg-h'); hd0.style.gridRow = 1; hd0.style.gridColumn = 1;
@@ -913,12 +1085,13 @@ section.subj{
       const b = mkEl('vg-block');
       b.style.gridRow = rowOf(seg.s) + ' / ' + (rowOf(seg.e - 1) + 1);
       b.style.gridColumn = i + 2;
-      b.style.background = 'var(' + bg + ')';
-      b.style.color = 'var(' + on + ')';
+      b.style.setProperty('--seg', 'var(' + bg + ')');
+      b.style.setProperty('--seg-on', 'var(' + on + ')');
       b.tabIndex = 0;
       if (seg.soft) b.classList.add('is-soft');
       if (seg.over) b.classList.add('is-over');
       b.setAttribute('aria-label', c.name + ' ' + seg.label + '，' + seg.when + '。' + seg.what);
+      MARKS.push({ el: b, key: phaseKey(c.lane, seg.label) });
 
       const sp = document.createElement('span');
       sp.textContent = seg.short || seg.label;
@@ -939,7 +1112,7 @@ section.subj{
 
   /* ---------- subject detail ---------- */
   const subsEl = document.getElementById('subjects');
-  SUBJECTS.forEach(function(sub){
+  SUBJECTS.forEach(function(sub, si){
     const sec = document.createElement('section');
     sec.className = 'subj';
 
@@ -950,11 +1123,15 @@ section.subj{
     dot.style.background = 'var(' + sub.hue + ')';
     const h2 = document.createElement('h2'); h2.textContent = sub.name;
     const hint = document.createElement('span'); hint.className = 'hint'; hint.textContent = sub.hint;
-    head.appendChild(dot); head.appendChild(h2); head.appendChild(hint);
+    const cnt = document.createElement('span');
+    cnt.className = 'subj-count';
+    cnt.textContent = '0 / ' + sub.rows.length;
+    head.appendChild(dot); head.appendChild(h2); head.appendChild(hint); head.appendChild(cnt);
+    COUNTS.push(cnt);
 
     const list = document.createElement('div');
     list.className = 'phases';
-    sub.rows.forEach(function(p){
+    sub.rows.forEach(function(p, ri){
       const row = document.createElement('div');
       row.className = 'phase';
 
@@ -972,7 +1149,24 @@ section.subj{
 
       const pd = document.createElement('div'); pd.className = 'pd'; pd.textContent = p.what;
 
-      row.appendChild(pw); row.appendChild(pn); row.appendChild(pd);
+      /* 勾选框用的是这个阶段在时间轴上的同一个颜色 */
+      const key    = 's' + si + '-' + ri;
+      const bgVar  = p.stage ? STAGE[p.stage].bg : sub.hue;
+      const onVar  = p.stage ? STAGE[p.stage].on : ('--on-' + sub.hue.slice(2));
+      const tick = document.createElement('input');
+      tick.type = 'checkbox';
+      tick.className = 'tick';
+      tick.style.setProperty('--tick-bg', 'var(' + bgVar + ')');
+      tick.style.setProperty('--tick-on', 'var(' + onVar + ')');
+      tick.setAttribute('aria-label', '标记「' + p.name + '」为已完成');
+      tick.addEventListener('change', function(){
+        if (tick.checked) done.add(key); else done.delete(key);
+        persist();
+        refresh();
+      });
+
+      row.appendChild(pw); row.appendChild(pn); row.appendChild(pd); row.appendChild(tick);
+      TICKS.push({ el: tick, key: key, row: row });
       list.appendChild(row);
     });
 
@@ -990,5 +1184,13 @@ section.subj{
     sec.appendChild(mats);
     subsEl.appendChild(sec);
   });
+
+  /* ---------- 首屏渲染进度 ---------- */
+  if (!canPersist){
+    const hint = document.getElementById('progHint');
+    hint.hidden = false;
+    hint.textContent = '这个浏览器不允许本地文件保存数据，打勾只在本次打开期间有效，关掉就没了。换成 Chrome 或 Edge 打开可以记住。';
+  }
+  refresh();
 })();
 </script>
