@@ -1,0 +1,989 @@
+<title>武汉理工应统考研路线图</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@600;700&display=swap">
+
+<style>
+/* ---------- tokens: light is the base ---------- */
+:root{
+  color-scheme: light;
+  --plane:#f4f5f7;
+  --surface:#ffffff;
+  --surface-2:#f7f8fa;
+  --ink:#0b0c0e;
+  --ink-2:#55585f;
+  --ink-3:#8b8f97;
+  --hair:#e3e5e9;
+  --rule:#c9ccd2;
+  --focus:#1c5cab;
+
+  /* 数学: one hue, four ordered steps */
+  --m1:#86b6ef;  --on-m1:#0b0c0e;
+  --m2:#3987e5;  --on-m2:#0b0c0e;
+  --m3:#1c5cab;  --on-m3:#ffffff;
+  --m4:#0d366b;  --on-m4:#ffffff;
+
+  --eng:#eb6834; --on-eng:#0b0c0e;
+  --pro:#1baf7a; --on-pro:#0b0c0e;
+  --pol:#4a3aa7; --on-pol:#ffffff;
+
+  --mw:60px;
+  --gutter:88px;
+  --gap:2px;
+}
+
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme: dark;
+    --plane:#0b0c0d;
+    --surface:#17181a;
+    --surface-2:#1d1f22;
+    --ink:#ffffff;
+    --ink-2:#bcc0c7;
+    --ink-3:#8b8f97;
+    --hair:#2a2c30;
+    --rule:#3a3d42;
+    --focus:#86b6ef;
+
+    --m1:#cde2fb;  --on-m1:#0b0c0e;
+    --m2:#6da7ec;  --on-m2:#0b0c0e;
+    --m3:#2a78d6;  --on-m3:#0b0c0e;
+    --m4:#184f95;  --on-m4:#ffffff;
+
+    --eng:#d95926; --on-eng:#0b0c0e;
+    --pro:#199e70; --on-pro:#0b0c0e;
+    --pol:#9085e9; --on-pol:#0b0c0e;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --plane:#0b0c0d;
+  --surface:#17181a;
+  --surface-2:#1d1f22;
+  --ink:#ffffff;
+  --ink-2:#bcc0c7;
+  --ink-3:#8b8f97;
+  --hair:#2a2c30;
+  --rule:#3a3d42;
+  --focus:#86b6ef;
+
+  --m1:#cde2fb;  --on-m1:#0b0c0e;
+  --m2:#6da7ec;  --on-m2:#0b0c0e;
+  --m3:#2a78d6;  --on-m3:#0b0c0e;
+  --m4:#184f95;  --on-m4:#ffffff;
+
+  --eng:#d95926; --on-eng:#0b0c0e;
+  --pro:#199e70; --on-pro:#0b0c0e;
+  --pol:#9085e9; --on-pol:#0b0c0e;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:var(--plane);
+  color:var(--ink);
+  font-family:"Noto Sans SC",system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;
+  font-size:14px;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+
+.wrap{
+  max-width:1160px;
+  margin:0 auto;
+  padding-block:40px 72px;
+  padding-inline:20px;
+}
+
+/* ---------- type roles ---------- */
+.serif{font-family:"Noto Serif SC",Georgia,"Songti SC",serif}
+.mono{font-family:"IBM Plex Mono",ui-monospace,Consolas,monospace;font-variant-numeric:tabular-nums}
+.eyebrow{
+  font-family:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  font-size:11px;letter-spacing:.1em;color:var(--ink-3);
+  text-transform:uppercase;
+}
+
+/* ---------- header ---------- */
+header.top{display:flex;flex-direction:column;gap:14px;margin-bottom:34px}
+h1{
+  font-family:"Noto Serif SC",Georgia,"Songti SC",serif;
+  font-weight:700;
+  font-size:clamp(24px,3.4vw,32px);
+  line-height:1.3;
+  letter-spacing:.01em;
+  margin:0;
+  text-wrap:balance;
+}
+.meta{
+  display:flex;flex-wrap:wrap;gap:8px 22px;
+  font-family:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  font-size:12.5px;color:var(--ink-2);
+}
+.meta b{font-weight:500;color:var(--ink)}
+.lede{margin:0;color:var(--ink-2);max-width:64ch}
+
+/* ---------- daily line ---------- */
+.daily{
+  background:var(--surface);
+  border:1px solid var(--hair);
+  border-radius:10px;
+  padding:20px 24px 22px;
+  margin-bottom:16px;
+  display:flex;flex-direction:column;gap:12px;
+}
+.daily-meta{
+  display:flex;align-items:center;flex-wrap:wrap;gap:4px 8px;
+  font-family:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  font-size:11.5px;letter-spacing:.06em;color:var(--ink-3);
+}
+.daily-meta .dot{width:9px;height:9px;border-radius:3px;flex:0 0 auto}
+.daily-meta .sep{opacity:.55}
+.daily-quote{
+  margin:0;max-width:760px;
+  font-family:"Noto Serif SC",Georgia,"Songti SC",serif;
+  font-weight:600;
+  font-size:clamp(17px,2.1vw,20px);
+  line-height:1.75;
+  letter-spacing:.01em;
+  color:var(--ink);
+  text-wrap:pretty;
+}
+
+/* ---------- chart card ---------- */
+.chart{
+  background:var(--surface);
+  border:1px solid var(--hair);
+  border-radius:10px;
+  padding:22px 22px 18px;
+  margin-bottom:16px;
+}
+.chart-head{
+  display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;
+  gap:8px 18px;margin-bottom:18px;
+}
+.chart-head h2{
+  font-family:"Noto Serif SC",Georgia,"Songti SC",serif;
+  font-size:16px;font-weight:600;margin:0;letter-spacing:.01em;
+}
+.chart-head p{margin:0;font-size:12.5px;color:var(--ink-3)}
+
+.gantt-scroll{overflow-x:auto;padding-bottom:6px}
+
+.gantt{
+  position:relative;
+  width:calc(var(--gutter) + 16 * var(--mw));
+  min-width:calc(var(--gutter) + 16 * var(--mw));
+}
+
+.row{
+  display:grid;grid-template-columns:var(--gutter) calc(16 * var(--mw));
+  background:var(--surface);
+}
+.row.zebra{background:var(--surface-2)}
+
+.gutter{
+  position:sticky;left:0;z-index:3;
+  background:inherit;
+  display:flex;flex-direction:column;justify-content:center;
+  padding-right:14px;
+  gap:2px;
+}
+.gutter .nm{
+  font-family:"Noto Serif SC",Georgia,"Songti SC",serif;
+  font-size:13.5px;font-weight:600;line-height:1.3;
+}
+.gutter .sb{font-size:10.5px;color:var(--ink-3);line-height:1.4}
+
+/* ruler */
+.ruler-row{align-items:end;padding-bottom:6px}
+.ruler{position:relative;height:34px}
+.years,.months{position:absolute;inset:0;display:flex}
+.years span{
+  font-family:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  font-size:11px;color:var(--ink-3);letter-spacing:.06em;
+  display:flex;align-items:center;
+  padding-left:1px;
+}
+.months{align-items:end}
+.months span{
+  width:var(--mw);flex:0 0 var(--mw);
+  font-family:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  font-size:11px;color:var(--ink-3);
+  text-align:center;line-height:1;
+  padding-bottom:2px;
+}
+.years{top:0;height:16px}
+
+/* today band */
+.today-row{position:relative;height:24px}
+.today-chip{
+  position:absolute;top:0;transform:translateX(-50%);
+  font-family:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  font-size:10.5px;letter-spacing:.06em;
+  color:var(--surface);background:var(--ink);
+  padding:1px 7px;border-radius:20px;white-space:nowrap;
+}
+.today-line{
+  position:absolute;width:1px;background:var(--ink);opacity:.55;z-index:2;
+  top:38px;bottom:14px;pointer-events:none;
+}
+
+/* lanes */
+.lanes{display:flex;flex-direction:column;gap:14px;padding-top:12px}
+.lane{border-top:1px solid var(--hair);padding-top:14px}
+.lane:first-child{border-top:0;padding-top:0}
+
+.track{
+  position:relative;
+  background-image:repeating-linear-gradient(to right,var(--hair) 0 1px,transparent 1px var(--mw));
+  display:flex;flex-direction:column;gap:4px;justify-content:center;
+}
+.subtrack{height:32px;position:relative}
+.yeartick{
+  position:absolute;left:calc(4 * var(--mw));top:0;bottom:0;width:1px;
+  background:var(--rule);z-index:1;
+}
+
+.seg{
+  position:absolute;
+  top:0;height:32px;
+  left:calc(var(--s) * var(--mw));
+  width:calc((var(--e) - var(--s)) * var(--mw) - var(--gap));
+  border-radius:5px;
+  display:flex;align-items:center;justify-content:center;
+  padding:0 5px;
+  overflow:hidden;
+  cursor:default;
+  transition:filter .12s ease;
+}
+.seg-label{
+  font-size:11px;font-weight:500;line-height:1.2;
+  white-space:nowrap;
+}
+.seg:hover,.seg:focus-visible{filter:brightness(1.08)}
+:root[data-theme="dark"] .seg:hover,
+:root[data-theme="dark"] .seg:focus-visible{filter:brightness(1.18)}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]) .seg:hover,
+  :root:not([data-theme="light"]) .seg:focus-visible{filter:brightness(1.18)}
+}
+.seg:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+
+/* ---------- 竖版时间轴：手机专用 ---------- */
+.gantt-v{
+  display:none;
+  grid-template-columns:54px repeat(5, minmax(0,1fr));
+  grid-template-rows:26px repeat(4, 34px) 20px repeat(12, 34px);
+  gap:3px;
+}
+.vg-h{
+  display:flex;align-items:flex-end;justify-content:center;
+  padding-bottom:5px;
+  font-family:"Noto Serif SC",Georgia,"Songti SC",serif;
+  font-size:10.5px;font-weight:600;color:var(--ink-2);
+  letter-spacing:.01em;
+}
+.vg-month{
+  display:flex;flex-direction:column;align-items:flex-end;justify-content:center;
+  padding-right:7px;gap:1px;
+  font-family:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  font-size:9.5px;color:var(--ink-3);
+}
+.vg-month.is-today{color:var(--ink)}
+.vg-month.is-today b{font-weight:700;font-size:9.5px;line-height:1}
+.vg-month.is-today span{font-size:8.5px;font-weight:400;color:var(--ink-3);line-height:1}
+.vg-year{
+  display:flex;align-items:center;
+  font-family:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  font-size:9.5px;color:var(--ink-3);letter-spacing:.06em;
+}
+.vg-today{
+  border-top:1px solid var(--ink);
+  opacity:.5;z-index:3;pointer-events:none;margin-top:-1px;
+}
+.vg-block{
+  position:relative;z-index:1;
+  border-radius:5px;
+  display:flex;align-items:center;justify-content:center;
+  padding:4px 2px;overflow:hidden;
+  cursor:default;
+}
+.vg-block span{
+  writing-mode:vertical-rl;
+  text-orientation:upright;
+  font-size:10px;font-weight:500;
+  line-height:1;letter-spacing:.05em;
+  white-space:nowrap;
+}
+.vg-block:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.vg-block.is-soft{opacity:.42}
+.vg-block.is-over{z-index:2;box-shadow:0 0 0 2px var(--surface)}
+
+/* legend */
+.legend{
+  display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;
+  margin-top:18px;padding-top:14px;border-top:1px solid var(--hair);
+  font-size:12px;color:var(--ink-2);
+}
+.legend .grp{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.legend .k{display:flex;align-items:center;gap:6px}
+.legend .sw{width:11px;height:11px;border-radius:3px;flex:0 0 auto}
+.legend .note{font-size:12px;color:var(--ink-3)}
+
+/* tooltip */
+#tip{
+  position:fixed;z-index:40;pointer-events:none;
+  max-width:290px;
+  background:var(--ink);color:var(--surface);
+  border-radius:7px;padding:9px 11px;
+  font-size:12px;line-height:1.55;
+  box-shadow:0 6px 22px rgba(0,0,0,.22);
+  opacity:0;transition:opacity .1s ease;
+}
+#tip.on{opacity:1}
+#tip .t{font-weight:700;font-size:12.5px;display:block;margin-bottom:2px}
+#tip .w{
+  font-family:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  font-size:11px;opacity:.72;display:block;margin-bottom:5px;
+}
+
+/* ---------- subject detail ---------- */
+section.subj{
+  background:var(--surface);
+  border:1px solid var(--hair);
+  border-radius:10px;
+  padding:20px 22px 18px;
+  margin-bottom:14px;
+}
+.subj-head{
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;margin-bottom:14px;
+}
+.subj-head h2{
+  font-family:"Noto Serif SC",Georgia,"Songti SC",serif;
+  font-size:18px;font-weight:700;margin:0;letter-spacing:.01em;
+}
+.subj-head .hint{font-size:12px;color:var(--ink-3)}
+.dot{width:10px;height:10px;border-radius:3px;display:inline-block;flex:0 0 auto}
+
+.phases{display:flex;flex-direction:column;gap:0}
+.phase{
+  display:grid;grid-template-columns:126px 108px 1fr;gap:4px 16px;
+  padding:9px 0;border-top:1px solid var(--hair);
+}
+.phase:first-child{border-top:0;padding-top:0}
+.phase:last-child{padding-bottom:0}
+.pw{
+  font-family:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  font-size:12px;color:var(--ink-2);padding-top:1px;
+}
+.pn{display:flex;align-items:baseline;gap:7px;font-weight:500;font-size:13.5px}
+.pn .dot{margin-top:5px}
+.pd{color:var(--ink-2);font-size:13.5px}
+
+.mats{
+  display:flex;flex-wrap:wrap;gap:7px;margin-top:16px;
+  padding-top:14px;border-top:1px solid var(--hair);
+}
+.mats .lb{
+  font-family:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  font-size:11px;letter-spacing:.08em;color:var(--ink-3);
+  align-self:center;margin-right:2px;
+}
+.chip{
+  font-size:12px;color:var(--ink-2);
+  border:1px solid var(--hair);border-radius:20px;
+  padding:2px 10px;background:var(--surface-2);
+  white-space:nowrap;
+}
+
+/* ---------- notes ---------- */
+.notes{
+  border:1px solid var(--hair);border-radius:10px;
+  padding:18px 22px;margin-top:16px;
+  background:var(--surface);
+}
+.notes h3{
+  font-family:"Noto Serif SC",Georgia,"Songti SC",serif;
+  font-size:14px;font-weight:600;margin:0 0 10px;
+}
+.notes ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px}
+.notes li{color:var(--ink-2);font-size:13px}
+.notes code{
+  font-family:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  font-size:12.5px;color:var(--ink);
+  background:var(--surface-2);border:1px solid var(--hair);
+  border-radius:4px;padding:0 4px;
+}
+
+@media (max-width:640px){
+  .wrap{padding-block:28px 56px}
+  .chart{padding:16px 14px}
+  .gantt-scroll{display:none}
+  .gantt-v{display:grid}
+  .phase{grid-template-columns:1fr;gap:2px 0;padding:11px 0}
+  .pn{order:-1}
+  .notes{padding:16px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+}
+</style>
+
+<div class="wrap">
+
+<header class="top">
+  <div class="eyebrow">2028 考研 · 初试预计 2027.12</div>
+  <h1>武汉理工大学应用统计学 · 备考路线图</h1>
+  <p class="lede">从 2026 年 9 月起步的 16 个月，四门课各自什么时候开始、推进到哪一阶段、用哪些书。数学是唯一贯穿全程的科目，政治留到最后四个月。</p>
+  <div class="meta">
+    <span>跨度 <b>2026.09 — 2027.12</b></span>
+    <span>科目 <b>4 门</b></span>
+    <span>数学日投入 <b>3 小时</b></span>
+    <span>专业课日投入 <b>3 小时</b></span>
+  </div>
+</header>
+
+<section class="daily" id="daily">
+  <div class="daily-meta">
+    <i class="dot" id="dDot"></i>
+    <span id="dStage">—</span>
+    <span class="sep">·</span>
+    <span id="dDay">—</span>
+    <span class="sep">·</span>
+    <span id="dLeft">—</span>
+  </div>
+  <p class="daily-quote" id="dQuote">—</p>
+</section>
+
+<div class="chart">
+  <div class="chart-head">
+    <h2>四科时间轴</h2>
+    <p>点按或悬停色块，看该阶段要做什么</p>
+  </div>
+
+  <div class="gantt-scroll">
+    <div class="gantt" id="gantt">
+      <div class="row ruler-row">
+        <div class="gutter"></div>
+        <div class="track ruler">
+          <div class="years" id="years"></div>
+          <div class="months" id="months"></div>
+        </div>
+      </div>
+      <div class="row today-row">
+        <div class="gutter"></div>
+        <div class="track" style="background-image:none">
+          <div class="today-chip" id="todayChip">今天</div>
+        </div>
+      </div>
+      <div class="lanes" id="lanes"></div>
+      <div class="today-line" id="todayLine" aria-hidden="true"></div>
+    </div>
+  </div>
+
+  <div class="gantt-v" id="ganttV"></div>
+
+  <div class="legend">
+    <div class="grp">
+      <span>数学</span>
+      <span class="k"><i class="sw" style="background:var(--m1)"></i>基础</span>
+      <span class="k"><i class="sw" style="background:var(--m2)"></i>强化</span>
+      <span class="k"><i class="sw" style="background:var(--m3)"></i>专题</span>
+      <span class="k"><i class="sw" style="background:var(--m4)"></i>冲刺</span>
+    </div>
+    <div class="grp">
+      <span class="k"><i class="sw" style="background:var(--eng)"></i>英语</span>
+      <span class="k"><i class="sw" style="background:var(--pro)"></i>专业课</span>
+      <span class="k"><i class="sw" style="background:var(--pol)"></i>政治</span>
+    </div>
+    <div class="note">数学四色由浅到深表示阶段递进：越深越接近考试。</div>
+  </div>
+</div>
+
+<div id="subjects"></div>
+
+<div class="notes">
+  <h3>一处需要留意的排期</h3>
+  <ul>
+    <li>原计划里 <code>二刷基础</code> 写到 3 月、<code>线代</code> 也从 3 月开始，两者重叠。图上线代放在数学的第二行，表示它和主线并行；表格里保留你写的原始月份。</li>
+  </ul>
+</div>
+
+</div>
+
+<div id="tip" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  const MW = 60, GAP = 2, MONTHS = 16;
+
+  const STAGE = {
+    1:{bg:'--m1', on:'--on-m1'},
+    2:{bg:'--m2', on:'--on-m2'},
+    3:{bg:'--m3', on:'--on-m3'},
+    4:{bg:'--m4', on:'--on-m4'}
+  };
+
+  const LANES = [
+    {
+      name:'数学', sub:'高数 · 线代 · 概率论',
+      rows:[
+        [
+          {s:0,e:4,label:'基础阶段',stage:1,when:'2026.09 – 2026.12',what:'基础 30 讲过一遍，同步 1000 题。每天 3 小时。'},
+          {s:4,e:7,label:'二刷基础',stage:1,when:'2027.01 – 2027.03',what:'二刷基础 30 讲，1000 题 B 组。'},
+          {s:7,e:10,label:'高数强化',stage:2,when:'2027.04 – 2027.07',what:'高数强化，多做题：880 高数基础题和综合题。'},
+          {s:10,e:11,label:'概率论',short:'概率',stage:2,when:'2027.07 – 2027.08',what:'概率论基础 + 强化一起看（方浩）。题目：880 基础和综合。'},
+          {s:11,e:12,label:'专题突破',short:'专题',stage:3,when:'2027.08 – 2027.09',what:'薄弱章节查漏补缺，二刷错题和强化讲义。'},
+          {s:12,e:13,label:'真题阶段',short:'真题',stage:4,when:'2027.09',what:'从 2010 年开始刷（李艳芳老师讲解），然后二刷所有错题。'},
+          {s:13,e:16,label:'模拟卷阶段',stage:4,when:'2027.10 – 考前',what:'刷套卷保持手感，李林 6 套卷。最后两周回归错题和公式。'}
+        ],
+        [
+          {s:6,e:8,label:'线代',stage:2,when:'2027.03 – 2027.04',what:'线性代数基础 + 强化连着看。与高数主线并行。'}
+        ]
+      ]
+    },
+    {
+      name:'英语', sub:'单词 · 作文',
+      rows:[
+        [ {s:0,e:16,label:'背单词',hue:'eng',soft:true,when:'2026.09 – 2027.12',what:'从第一天背到考前，全程不断。'} ],
+        [ {s:12,e:14,label:'作文背诵',hue:'eng',over:true,when:'2027.09 – 2027.10',what:'开始背诵作文。'} ]
+      ]
+    },
+    {
+      name:'专业课', sub:'贾书 · 真题',
+      rows:[
+        [
+          {s:6,e:10,label:'第一轮',hue:'pro',when:'2027.03 – 2027.06',what:'贾书第一轮，目标 6 月底过完。'},
+          {s:10,e:12,label:'第二轮',hue:'pro',when:'2027.07 – 2027.08',what:'教材例题、课后题、目标院校真题。'},
+          {s:12,e:14,label:'真题主导',hue:'pro',when:'2027.09 – 2027.10',what:'进入目标院校真题主导阶段。'},
+          {s:14,e:16,label:'查漏补缺',hue:'pro',when:'2027.11 – 考前',what:'后续查漏补缺。'}
+        ]
+      ]
+    },
+    {
+      name:'政治', sub:'2027.09 才开始',
+      rows:[
+        [
+          {s:12,e:13,label:'强化课',short:'强化',hue:'pol',when:'2027.09.01 起',what:'徐涛强化课 + 核心考案，只听马原和史纲。马原史纲 720 题，小程序刷题。'},
+          {s:13,e:14,label:'模拟卷',short:'模拟',hue:'pol',when:'2027.10',what:'10 月出模拟卷，开始练手。'},
+          {s:14,e:15,label:'肖八',hue:'pol',when:'2027.11',what:'只用做肖八的选择题。'},
+          {s:15,e:16,label:'肖四',hue:'pol',when:'2027.12',what:'肖四选择题要做，大题也要背。B 站抄材料教程，重点抓选择题和大题模板。'}
+        ]
+      ]
+    }
+  ];
+
+  const SUBJECTS = [
+    {
+      name:'数学', hue:'--m1', hint:'全程最长的一条线，先高数、再线代、再概率论',
+      rows:[
+        {when:'2026.09 – 12', name:'基础阶段', stage:1, what:'过一遍基础 30 讲，同步 1000 题。每天 3 小时。'},
+        {when:'2027.01 – 03', name:'二刷基础', stage:1, what:'二刷基础 30 讲，1000 题 B 组。'},
+        {when:'2027.03 – 04', name:'线代', stage:2, what:'线性代数，基础 + 强化连着看。'},
+        {when:'2027.04 – 07', name:'高数强化', stage:2, what:'高数强化，多做题——880 高数基础题和综合题。'},
+        {when:'2027.07 – 08', name:'概率论', stage:2, what:'基础加强化一起看（方浩）。题目：880 基础和综合。'},
+        {when:'2027.08 – 09', name:'专题突破', stage:3, what:'薄弱章节查漏补缺，二刷错题和强化讲义。'},
+        {when:'2027.09', name:'真题阶段', stage:4, what:'从 2010 年开始刷（李艳芳老师讲解），然后二刷所有错题。'},
+        {when:'2027.10 – 考前', name:'模拟卷阶段', stage:4, what:'刷套卷保持手感，李林 6 套卷。最后两周回归错题和公式。'}
+      ],
+      mats:['基础 30 讲','1000 题（含 B 组）','880 基础题 + 综合题','方浩概率论','李艳芳真题讲解（2010 起）','李林 6 套卷']
+    },
+    {
+      name:'英语', hue:'--eng', hint:'单词从头背到尾，作文九十月才进来',
+      rows:[
+        {when:'2026.09 – 2027.12', name:'背单词', stage:null, what:'全程不断，从第一天背到考前。'},
+        {when:'2027.09 – 10', name:'作文背诵', stage:null, what:'开始背诵作文。'}
+      ],
+      mats:['单词书','作文素材']
+    },
+    {
+      name:'专业课', hue:'--pro', hint:'贾俊平《统计学》，节奏是听课 1 小时 + 刷题整理笔记 2 小时',
+      rows:[
+        {when:'2027.03 – 06', name:'第一轮', stage:null, what:'贾俊平《统计学》第一轮，目标 6 月底完成。'},
+        {when:'2027.07 – 08', name:'第二轮', stage:null, what:'教材例题、课后题、目标院校真题。'},
+        {when:'2027.09 – 10', name:'真题主导', stage:null, what:'进入目标院校真题主导阶段。'},
+        {when:'2027.11 – 考前', name:'查漏补缺', stage:null, what:'后续查漏补缺。'}
+      ],
+      mats:['贾俊平《统计学》','目标院校真题','听课 1h + 刷题整理笔记 2h（每天）']
+    },
+    {
+      name:'政治', hue:'--pol', hint:'9 月 1 日才启动，越往后越重',
+      rows:[
+        {when:'2027.09.01 起', name:'徐涛强化课', stage:null, what:'书用《核心讲案》，只听马原和史纲；史纲放晚上放松听。马原和史纲 720 题，小程序刷题（南山不用买）。'},
+        {when:'2027.10', name:'模拟卷练手', stage:null, what:'10 月出模拟卷，可以开始练手。'},
+        {when:'2027.11', name:'肖八', stage:null, what:'只用做肖八的选择题。'},
+        {when:'2027.12', name:'肖四', stage:null, what:'肖四选择题要做，大题也要背。B 站抄材料教程；后期重点抓选择题和大题模板。'}
+      ],
+      mats:['徐涛强化课','徐涛《核心讲案》','马原 + 史纲 720 题','刷题小程序','肖八','肖四','B 站抄材料教程']
+    }
+  ];
+
+  /* ---------- month ruler ---------- */
+  const monthsEl = document.getElementById('months');
+  const yearsEl  = document.getElementById('years');
+  const monthNames = [];
+  for (let i = 0; i < MONTHS; i++){
+    const m = (i < 4) ? (i + 9) : (i - 3);
+    monthNames.push(m + '月');
+    const sp = document.createElement('span');
+    sp.textContent = m;
+    monthsEl.appendChild(sp);
+  }
+  [[0,4,'2026'],[4,12,'2027']].forEach(function(g){
+    const sp = document.createElement('span');
+    sp.style.width = (g[1] * MW) + 'px';
+    sp.style.flex = '0 0 ' + (g[1] * MW) + 'px';
+    sp.textContent = g[2];
+    yearsEl.appendChild(sp);
+  });
+
+  /* ---------- 今日：位置 + 阶段 + 一句 ---------- */
+  const PLAN_START = new Date(2026, 8, 1);    /* 2026-09-01 */
+  const EXAM       = new Date(2027, 11, 25);  /* 初试，预计 2027-12-25 */
+  const DAY        = 86400000;
+
+  const PHASES = [
+    { name:'基础期',   hue:'--m1', start:new Date(2026,8,1),   end:new Date(2026,11,31), quotes:[
+      '基础阶段看不出差距，这很正常。差距要到明年才显形，今天先把这 30 页翻完。',
+      '现在做错的题，比考试前做错的题便宜得多。',
+      '每天 3 小时，四个月就是三百多个小时，这是你比别人早出发的全部本钱。',
+      '不用今天就弄懂所有定理，先让它们在你眼前过三遍。',
+      '你现在觉得慢，是因为你在学新东西。觉得快才是问题。',
+      '单词今天背明天忘，这是它本来的样子，继续背就行。',
+      '1000 题第一遍错一半不叫失败，那叫第一遍。',
+      '起跑早的人最大的优势不是进度，是允许自己犯错的时间。',
+      '别拿自己的第一章去比别人的第五章。',
+      '把今天这一节真弄懂，比把整本书翻一遍有用。'
+    ]},
+    { name:'二刷期',   hue:'--m1', start:new Date(2027,0,1),   end:new Date(2027,2,31), quotes:[
+      '二刷的意义不在"又做了一遍"，在于第二遍你还错的那几道题。',
+      '线代和专业课一起开，会觉得挤。挤是正常的，先保证每天都碰到它们。',
+      '寒假是最容易掉队的两个月，也是最能拉开差距的两个月。',
+      '错题本不是抄题本，该写下来的是"我当时为什么那样想"。',
+      '这一遍要开始问为什么，而不只是怎么做。',
+      '专业课第一轮不追求记住，追求知道它在讲什么。',
+      '每天推进一点，比攒到周末补一天有效。',
+      '你不需要状态好才坐下来，是坐下来之后状态才会好。',
+      '三月结束的时候，你会感谢一月的自己。',
+      '进度落后不可怕，节奏断掉才可怕。'
+    ]},
+    { name:'强化期',   hue:'--m2', start:new Date(2027,3,1),   end:new Date(2027,5,30), quotes:[
+      '强化阶段的关键词是多做题，不是多看课。',
+      '看懂了和能做出来，中间隔着几十道题。',
+      '880 做不动的时候，说明你在有效区间里。',
+      '六月有期末，会很乱。给考研留一条最低限度不断线就够。',
+      '这个阶段最容易犯的错，是只做自己会做的题。',
+      '一道题想二十分钟再翻答案，省下的是明年的时间。',
+      '专业课第一轮要在六月收尾，别拖进暑假。',
+      '手比眼快，做题比看题快。',
+      '强化期不追求正确率，追求覆盖面。',
+      '你现在的对手不是别人，是六月那个想放弃的自己。'
+    ]},
+    { name:'暑假攻坚', hue:'--m3', start:new Date(2027,6,1),   end:new Date(2027,7,31), quotes:[
+      '暑假是唯一一段没人打扰你的时间，它决定了十月你慌不慌。',
+      '概率论和专业课堆在一起的时候，先做今天那份，别去算总量。',
+      '专题突破就是找自己的漏洞，找到了是好事。',
+      '暑假在图书馆坐着的人，十二月在考场上会是另一种表情。',
+      '二刷错题比三刷新题值钱。',
+      '天热、进度慢、想放弃，这三件事每年夏天都会来，你不是特例。',
+      '把薄弱章节单独拎出来打，比整套卷子反复刷有效。',
+      '现在补上的每一个洞，都是考场上不会丢的分。',
+      '暑假结束时，你要能说出自己最弱的是哪三章。',
+      '这一段熬过去，后面就只是重复了。'
+    ]},
+    { name:'真题期',   hue:'--m4', start:new Date(2027,8,1),   end:new Date(2027,8,30), quotes:[
+      '真题不是用来测分数的，是用来告诉你出题人怎么想的。',
+      '第一次做真题分数难看是标准流程，别把它当判决书。',
+      '政治九月才开始，来得及，每天一小时就够。',
+      '四门课一起压过来的时候，排出优先级，别四门都想要满分。',
+      '真题要二刷错题，不然第一遍等于白做。',
+      '这一阶段你很忙，忙是对的。',
+      '从 2010 年开始刷是在补历史，别跳着做。',
+      '开学后时间变碎，碎时间用来背，整块时间用来算。',
+      '作文现在开始背，到十二月你会庆幸。',
+      '你不是在复习，你是在把自己训练成一个会考试的人。'
+    ]},
+    { name:'模考期',   hue:'--m4', start:new Date(2027,9,1),   end:new Date(2027,11,10), quotes:[
+      '模考分数波动是正常的，你要看的是错在哪儿，不是考了多少。',
+      '李林六套卷的价值在限时，不限时做等于没做。',
+      '十一月肖八只做选择题，别贪大题的进度。',
+      '十二月肖四大题要背，这是少数能靠背拿分的地方。',
+      '套卷按考试时间做，让身体记住那个节奏。',
+      '这个阶段不再学新东西，把会的变成稳的。',
+      '考前一个月掉分不代表退步，是卷子变难了。',
+      '每天保持手感，比某一天猛做十小时有用。',
+      '别人晒进度的时候你在做题，这就够了。',
+      '现在每一次限时训练，都是在替考场上的你省时间。'
+    ]},
+    { name:'考前两周', hue:'--m4', start:new Date(2027,11,11), end:new Date(2027,11,24), quotes:[
+      '最后两周不碰新题，只看错题和公式。',
+      '这两周的目标，是把状态调到考试那两天的早上八点。',
+      '你复习过的每一样东西都还在，只是需要被叫醒。',
+      '睡不着就躺着，躺够时间也算休息。',
+      '考场上遇到不会的题是必然的，跳过它，先拿会的分。',
+      '别在这两周换资料、换方法、换作息。',
+      '走到这里的人已经不多，你已经赢了一部分。',
+      '进场前深呼吸三次，比再多看一页有用。',
+      '把会做的分拿干净，这本身就是高分。',
+      '明天照常，后天也照常，然后去考试。'
+    ]}
+  ];
+
+  function startOfDay(d){ return new Date(d.getFullYear(), d.getMonth(), d.getDate()); }
+  const today = startOfDay(new Date());
+
+  /* 时间轴上的位置 */
+  const midx = (today.getFullYear() - 2026) * 12 + (today.getMonth() - 8);
+  const dim  = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
+  const pos  = Math.min(16, Math.max(0, midx + (today.getDate() - 1) / dim));
+  const TODAY_X = pos * MW;
+  document.getElementById('todayChip').style.left = TODAY_X + 'px';
+  document.getElementById('todayLine').style.left =
+    'calc(var(--gutter) + ' + TODAY_X + 'px)';
+
+  /* 当前阶段 */
+  let phase = PHASES.find(function(p){ return today >= p.start && today <= p.end; });
+  let over = false;
+  if (!phase){
+    if (today < PHASES[0].start){ phase = PHASES[0]; }
+    else { phase = PHASES[PHASES.length - 1]; over = today > EXAM; }
+  }
+
+  /* 同日同句，跨天顺延；阶段一换，整库跟着换 */
+  const offset = Math.floor((today - PLAN_START) / DAY);
+  const n = phase.quotes.length;
+  const quote = phase.quotes[((offset % n) + n) % n];
+
+  document.getElementById('dDot').style.background = 'var(' + phase.hue + ')';
+  document.getElementById('dStage').textContent = phase.name;
+  document.getElementById('dDay').textContent = '第 ' + (offset + 1) + ' 天';
+
+  const daysLeft = Math.ceil((EXAM - today) / DAY);
+  document.getElementById('dLeft').textContent =
+    over ? '初试已结束'
+         : (daysLeft > 0 ? '距初试 ' + daysLeft + ' 天'
+                         : (daysLeft === 0 ? '今天就是初试' : '初试已结束'));
+
+  document.getElementById('dQuote').textContent =
+    over ? '初试结束了。不管结果怎样，这段时间是你自己走完的。' : quote;
+
+  /* ---------- lanes ---------- */
+  const lanesEl = document.getElementById('lanes');
+  const tip = document.getElementById('tip');
+
+  function showTip(el, seg){
+    tip.innerHTML = '';
+    const t = document.createElement('span'); t.className = 't'; t.textContent = seg.label;
+    const w = document.createElement('span'); w.className = 'w'; w.textContent = seg.when;
+    const d = document.createElement('span'); d.textContent = seg.what;
+    tip.appendChild(t); tip.appendChild(w); tip.appendChild(d);
+    tip.classList.add('on');
+    const r = el.getBoundingClientRect();
+    const tr = tip.getBoundingClientRect();
+    let left = r.left + r.width / 2 - tr.width / 2;
+    left = Math.max(12, Math.min(left, window.innerWidth - tr.width - 12));
+    let top = r.top - tr.height - 10;
+    if (top < 12) top = r.bottom + 10;
+    tip.style.left = left + 'px';
+    tip.style.top = top + 'px';
+  }
+  function hideTip(){ tip.classList.remove('on'); }
+
+  LANES.forEach(function(lane, li){
+    const wrap = document.createElement('div');
+    wrap.className = 'lane';
+
+    const zebra = (li % 2 === 1);
+
+    for (let r = 0; r < 2; r++){
+      const row = document.createElement('div');
+      row.className = 'row' + (zebra ? ' zebra' : '');
+
+      const g = document.createElement('div');
+      g.className = 'gutter';
+      if (r === 0){
+        const nm = document.createElement('span'); nm.className = 'nm'; nm.textContent = lane.name;
+        const sb = document.createElement('span'); sb.className = 'sb'; sb.textContent = lane.sub;
+        g.appendChild(nm); g.appendChild(sb);
+      }
+      row.appendChild(g);
+
+      const tk = document.createElement('div');
+      tk.className = 'track';
+      const st = document.createElement('div');
+      st.className = 'subtrack';
+      if (r === 0){
+        const yt = document.createElement('div'); yt.className = 'yeartick'; st.appendChild(yt);
+      }
+
+      const segs = lane.rows[r] || [];
+      segs.forEach(function(seg){
+        const bg = seg.stage ? STAGE[seg.stage].bg : ('--' + seg.hue);
+        const on = seg.stage ? STAGE[seg.stage].on : ('--on-' + seg.hue);
+
+        const d = document.createElement('div');
+        d.className = 'seg';
+        d.tabIndex = 0;
+        d.style.setProperty('--s', seg.s);
+        d.style.setProperty('--e', seg.e);
+        d.style.background = 'var(' + bg + ')';
+        d.style.color = 'var(' + on + ')';
+        d.setAttribute('aria-label', lane.name + ' ' + seg.label + '，' + seg.when + '。' + seg.what);
+
+        const sp = document.createElement('span');
+        sp.className = 'seg-label';
+        sp.textContent = seg.label;
+        d.appendChild(sp);
+
+        d.addEventListener('pointerenter', function(){ showTip(d, seg); });
+        d.addEventListener('pointerleave', hideTip);
+        d.addEventListener('focus', function(){ showTip(d, seg); });
+        d.addEventListener('blur', hideTip);
+
+        st.appendChild(d);
+      });
+
+      tk.appendChild(st);
+      row.appendChild(tk);
+      wrap.appendChild(row);
+    }
+    lanesEl.appendChild(wrap);
+  });
+
+  /* ---------- 竖版时间轴（手机）：月份往下走，五列并排 ---------- */
+  const vgEl = document.getElementById('ganttV');
+  const curMonth = Math.min(15, Math.max(0, Math.floor(pos)));
+  function rowOf(m){ return m < 4 ? m + 2 : m + 3; }
+  function mkEl(cls, txt){
+    const d = document.createElement('div');
+    d.className = cls;
+    if (txt != null) d.textContent = txt;
+    return d;
+  }
+  function mLabel(m){ return (m < 4 ? m + 9 : m - 3) + '月'; }
+
+  const VCOLS = [
+    {name:'数学',   segs: LANES[0].rows[0]},
+    {name:'线代',   segs: LANES[0].rows[1]},
+    {name:'英语',   segs: LANES[1].rows[0].concat(LANES[1].rows[1] || [])},
+    {name:'专业课', segs: LANES[2].rows[0]},
+    {name:'政治',   segs: LANES[3].rows[0]}
+  ];
+
+  const hd0 = mkEl('vg-h'); hd0.style.gridRow = 1; hd0.style.gridColumn = 1;
+  vgEl.appendChild(hd0);
+  VCOLS.forEach(function(c, i){
+    const h = mkEl('vg-h', c.name);
+    h.style.gridRow = 1; h.style.gridColumn = i + 2;
+    vgEl.appendChild(h);
+  });
+
+  for (let m = 0; m < 16; m++){
+    const cellEl = mkEl('vg-month');
+    cellEl.style.gridRow = rowOf(m); cellEl.style.gridColumn = 1;
+    if (m === curMonth){
+      cellEl.classList.add('is-today');
+      const b = document.createElement('b'); b.textContent = '今天';
+      const s = document.createElement('span'); s.textContent = mLabel(m);
+      cellEl.appendChild(b); cellEl.appendChild(s);
+    } else {
+      cellEl.textContent = mLabel(m);
+    }
+    vgEl.appendChild(cellEl);
+  }
+  const yrEl = mkEl('vg-year', '2027 年');
+  yrEl.style.gridRow = 6; yrEl.style.gridColumn = 1;
+  vgEl.appendChild(yrEl);
+
+  const vt = mkEl('vg-today');
+  vt.style.gridRow = rowOf(curMonth); vt.style.gridColumn = '1 / -1';
+  vgEl.appendChild(vt);
+
+  VCOLS.forEach(function(c, i){
+    c.segs.forEach(function(seg){
+      const bg = seg.stage ? STAGE[seg.stage].bg : ('--' + seg.hue);
+      const on = seg.stage ? STAGE[seg.stage].on : ('--on-' + seg.hue);
+      const b = mkEl('vg-block');
+      b.style.gridRow = rowOf(seg.s) + ' / ' + (rowOf(seg.e - 1) + 1);
+      b.style.gridColumn = i + 2;
+      b.style.background = 'var(' + bg + ')';
+      b.style.color = 'var(' + on + ')';
+      b.tabIndex = 0;
+      if (seg.soft) b.classList.add('is-soft');
+      if (seg.over) b.classList.add('is-over');
+      b.setAttribute('aria-label', c.name + ' ' + seg.label + '，' + seg.when + '。' + seg.what);
+
+      const sp = document.createElement('span');
+      sp.textContent = seg.short || seg.label;
+      b.appendChild(sp);
+
+      b.addEventListener('pointerenter', function(){ showTip(b, seg); });
+      b.addEventListener('pointerleave', hideTip);
+      b.addEventListener('click', function(){ showTip(b, seg); });
+      b.addEventListener('focus', function(){ showTip(b, seg); });
+      b.addEventListener('blur', hideTip);
+
+      vgEl.appendChild(b);
+    });
+  });
+
+  window.addEventListener('scroll', hideTip, {passive:true});
+  window.addEventListener('resize', hideTip);
+
+  /* ---------- subject detail ---------- */
+  const subsEl = document.getElementById('subjects');
+  SUBJECTS.forEach(function(sub){
+    const sec = document.createElement('section');
+    sec.className = 'subj';
+
+    const head = document.createElement('div');
+    head.className = 'subj-head';
+    const dot = document.createElement('i');
+    dot.className = 'dot';
+    dot.style.background = 'var(' + sub.hue + ')';
+    const h2 = document.createElement('h2'); h2.textContent = sub.name;
+    const hint = document.createElement('span'); hint.className = 'hint'; hint.textContent = sub.hint;
+    head.appendChild(dot); head.appendChild(h2); head.appendChild(hint);
+
+    const list = document.createElement('div');
+    list.className = 'phases';
+    sub.rows.forEach(function(p){
+      const row = document.createElement('div');
+      row.className = 'phase';
+
+      const pw = document.createElement('div'); pw.className = 'pw'; pw.textContent = p.when;
+
+      const pn = document.createElement('div'); pn.className = 'pn';
+      if (p.stage){
+        const d2 = document.createElement('i');
+        d2.className = 'dot';
+        d2.style.background = 'var(' + STAGE[p.stage].bg + ')';
+        pn.appendChild(d2);
+      }
+      const nm = document.createElement('span'); nm.textContent = p.name;
+      pn.appendChild(nm);
+
+      const pd = document.createElement('div'); pd.className = 'pd'; pd.textContent = p.what;
+
+      row.appendChild(pw); row.appendChild(pn); row.appendChild(pd);
+      list.appendChild(row);
+    });
+
+    const mats = document.createElement('div');
+    mats.className = 'mats';
+    const lb = document.createElement('span'); lb.className = 'lb'; lb.textContent = '材料';
+    mats.appendChild(lb);
+    sub.mats.forEach(function(m){
+      const c = document.createElement('span'); c.className = 'chip'; c.textContent = m;
+      mats.appendChild(c);
+    });
+
+    sec.appendChild(head);
+    sec.appendChild(list);
+    sec.appendChild(mats);
+    subsEl.appendChild(sec);
+  });
+})();
+</script>
